@@ -1,35 +1,35 @@
 <script>
-import LivrosApi from "@/api/livros.js";
-const livrosApi = new LivrosApi();
-export default {
-  data() {
-    return {
-      livro: {},
-      livros: [],
-    };
-  },
-  async created() {
-    this.livros = await LivrosApi.buscarTodosOsLivros();
-  },
-  methods: {
-    async salvar() {
-      if (this.livro.id) {
-        await LivrosApi.atualizarLivro(this.livro);
-      } else {
-        await LivrosApi.adicionarLivro(this.livro);
-      }
-      this.livros = await LivrosApi.buscarTodosOsLivros();
-      this.livro = {};
+  import LivrosApi from "@/api/livros.js";
+  const livrosApi = new LivrosApi();
+  export default {
+    data() {
+      return {
+        livro: {},
+        livros: [],
+      };
     },
-    async excluir(livro) {
-      await LivrosApi.excluirLivro(livro.id);
-      this.livros = await LivrosApi.buscarTodosOsLivros();
+    async created() {
+      this.livros = await livrosApi.buscarTodosOsLivros();
     },
-    editar(livro) {
-      Object.assign(this.livro, livro);
+    methods: {
+      async salvar() {
+        if (this.livro.id) {
+          await livrosApi.atualizarLivro(this.livro);
+        } else {
+          await livrosApi.adicionarLivro(this.livro);
+        }
+        this.livros = await livrosApi.buscarTodosOsLivros();
+        this.livro = {};
+      },
+      async excluir(livro) {
+        await livrosApi.excluirLivro(livro.id);
+        this.livros = await livrosApi.buscarTodosOsLivros();
+      },
+      editar(livro) {
+        Object.assign(this.livro, livro);
+      },
     },
-  },
-};
+  };
 </script>
 
 <template>
@@ -39,7 +39,11 @@ export default {
     </div>
     <div class="form-input">
       <input type="text" placeholder="Nome" v-model="livro.nome" />
-      <input type="number" placeholder="Quantidade" v-model="livro.quantidade" />
+      <input
+        type="number"
+        placeholder="Quantidade"
+        v-model="livro.quantidade"
+      />
       <input type="number" placeholder="Preço" v-model="livro.preco" />
 
       <button @click="salvar(Livro)">Salvar</button>
@@ -79,68 +83,68 @@ export default {
 </template>
 
 <style>
-.title {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-}
-.form-input {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-}
+  .title {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .form-input {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
 
-.form-input input {
-  width: 30%;
-  height: 40px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 0 10px;
-}
+  .form-input input {
+    width: 30%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 0 10px;
+  }
 
-.form-input button {
-  margin-left: 1%;
-  width: 20%;
-  height: 40px;
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 10px;
-  background-color: rgb(0, 0, 0);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
+  .form-input button {
+    margin-left: 1%;
+    width: 20%;
+    height: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
 
-.list-editoras {
-  display: flex;
-  justify-content: center;
-}
+  .list-editoras {
+    display: flex;
+    justify-content: center;
+  }
 
-table {
-  width: 80%;
-  margin: 2% auto;
-  border-collapse: collapse;
-}
+  table {
+    width: 80%;
+    margin: 2% auto;
+    border-collapse: collapse;
+  }
 
-table tr th {
-  border: 1px solid #ccc;
-  padding: 10px;
-  font-weight: bold;
-}
+  table tr th {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-weight: bold;
+  }
 
-table tr td {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
+  table tr td {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
 
-table tr:nth-child(odd) {
-  background-color: #ccc;
-}
-.excluir {
-  background-color: black;
-  color: white;
-  border: white;
-  border-radius: 20px;
-  width: 93%;
-  height: 30px;
-}
+  table tr:nth-child(odd) {
+    background-color: #ccc;
+  }
+  .excluir {
+    background-color: black;
+    color: white;
+    border: white;
+    border-radius: 20px;
+    width: 93%;
+    height: 30px;
+  }
 </style>

@@ -1,28 +1,29 @@
 import axios from "axios";
 export default class CategoriasApi {
   async buscarTodasAsCategorias() {
-    const response = await axios.get("http://localhost:4000/categorias");
+    const response = await axios.get("https://livrariamylene.herokuapp.com/categorias");
     return response.data;
   }
-
-  async buscarCategorias(id) {
-    const response = await axios.get(`http://localhost:4000/categorias/${id}`);
+  async buscarCategoria(id) {
+    const response = await axios.get(`https://livrariamylene.herokuapp.com/categorias/${id}`);
     return response.data;
   }
-
   async adicionarCategoria(categoria) {
-    const response = await axios.post("http://localhost:4000/categorias", categoria);
+    const response = await axios.post(
+      "https://livrariamylene.herokuapp.com/categorias",
+      categoria
+    );
     return response.data;
   }
-
   async excluirCategoria(id) {
-    const response = await axios.delete(`http://localhost:4000/categorias/${id}`);
+    const response = await axios.delete(
+      `https://livrariamylene.herokuapp.com/categorias/${id}`
+    );
     return response.data;
   }
-
   async atualizarCategoria(categoria) {
     const response = await axios.put(
-      `http://localhost:4000/categorias/${categoria.id}`,
+      `https://livrariamylene.herokuapp.com/categorias/${categoria.id}`,
       categoria
     );
     return response.data;

@@ -38,7 +38,7 @@ export default {
       <h2>Gerenciamento de Autores</h2>
     </div>
     <div class="form-input">
-      <input type="text" placeholder="Autor" v-model="novo_autor" />
+      <input type="text" placeholder="Autor" v-model="autor.nome" />
       <button @click="salvar()">Salvar</button>
     </div>
     <div class="list-autores">
@@ -55,8 +55,8 @@ export default {
             <td>{{ autores.id }}</td>
             <td>{{ autores.nome }}</td>
             <td>
-              <button class="excluir" @click="excluir()">Excluir</button>
-              <button class="editar" @click="editar()">Editar</button>
+              <button class="excluir" @click="excluir(autores)">Excluir</button>
+              <button class="editar" @click="editar(autores)">Editar</button>
             </td>
           </tr>
         </tbody>
